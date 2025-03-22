@@ -64,6 +64,10 @@ const images = [
     description: 'Lighthouse Coast Sea',
   },
 ];
+
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
 const container = document.querySelector('.gallery');
 container.innerHTML = images.reduce(
   (html, image) =>
@@ -82,40 +86,23 @@ container.innerHTML = images.reduce(
   `,
   ''
 );
+const styleRef = new SimpleLightbox('.gallery a', {
+  captionDelay: 250,
+  captionsData: 'alt',
+});
 
-/* <li class="gallery-item">
-  <a class="gallery-link" href="${image.original}">
-    <img class="gallery-image" src="{image.preview}" alt="${image.description}" width="360" height="200" />
-  </a>
-</li>; */
+styleRef.on('shown.simplelightbox', function () {
+  const modal = document.querySelector('.sl-wrapper');
+  modal.style.backgroundColor = 'rgba(46, 47, 66, 0.80)';
 
-// container.addEventListener('click', event => {
-//   event.preventDefault();
-//   const productImg = event.target.dataset.source;
-//   if (productImg) {
-//     const product = images.find(image => image.original === productImg);
-//     if (!product) return;
+  const closeButton = document.querySelector('.sl-close');
+  closeButton.style.color = '#fff';
 
-//     const myModal = basicLightbox.create(
-//       `<div class="modal">
-// 		<img class="modal-img" width="1112" height="640" src="${productImg}">
-//     </div>`,
+  const counter = document.querySelector('.sl-counter');
+  counter.style.color = '#fff';
 
-//       {
-//         onShow: () => {
-//           document.addEventListener('keydown', onKey);
-//         },
-//         onClose: () => {
-//           document.removeEventListener('keydown', onKey);
-//         },
-//       }
-//     );
-//     myModal.show();
-
-//     function onKey(params) {
-//       if (params.code === 'Escape') {
-//         myModal.close();
-//       }
-//     }
-//   }
-// });
+  const navigationButtons = document.querySelectorAll('.sl-navigation button');
+  navigationButtons.forEach(button => {
+    button.style.color = '#fff';
+  });
+});
