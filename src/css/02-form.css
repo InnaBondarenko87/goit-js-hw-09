@@ -28,6 +28,7 @@ input {
 }
 
 textarea {
+  padding-top: 16px;
   width: 344px;
   height: 80px;
   resize: none;
