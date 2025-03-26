@@ -12,7 +12,7 @@ if (initialFormData !== null && initialFormData !== '') {
     formData = JSON.parse(initialFormData);
 
     for (const fieldName in formData) {
-      form.elements[fieldName].value = formData[fieldName];
+      formEl.elements[fieldName].value = formData[fieldName];
     }
   } catch {}
 }
@@ -33,13 +33,14 @@ function handleFormElSubmit(e) {
 
   for (const fieldName in formData) {
     if (!formEl.elements[fieldName].value) {
-      alert('All form fields must be filled in');
+      alert('Fill please all fields');
 
       return;
     }
   }
 
   for (const fieldName in formData) {
+    formData[fieldName] = '';
     formEl.elements[fieldName].value = '';
   }
 
